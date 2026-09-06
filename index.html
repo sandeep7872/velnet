@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VelvetNet — Your Business. Digitally Better.</title>
+    <meta name="description" content="VelvetNet helps small and medium-sized businesses improve their digital presence, automate repetitive work, and manage operations through modern websites, custom software, automation and AI solutions." />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="VelvetNet — Your Business. Digitally Better." />
+    <meta property="og:description" content="Business technology & digital solutions for growing businesses. Websites, software, automation and AI." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://velvetnet.com" />
+    <meta name="theme-color" content="#0a0a12" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js">
+    </script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js">
+    </script>
+    <!-- Babel Standalone -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js">
+    </script>
+
+    <style>
+        /* ─── Custom Reset & Base ─── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a12;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        /* ─── Scrollbar ─── */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4A6FA5;
+            border-radius: 6px;
+        }
+
+        /* ─── Tailwind overrides & utilities ─── */
+        .font-heading {
+            font-family: 'Manrope', sans-serif;
+        }
+        .font-body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* New accent color: Slate Blue */
+        .text-accent {
+            color: #4A6FA5;
+        }
+        .border-accent {
+            border-color: #4A6FA5;
+        }
+        .bg-accent {
+            background-color: #4A6FA5;
+        }
+        .bg-accent\/10 {
+            background-color: rgba(74, 111, 165, 0.10);
+        }
+        .bg-accent\/5 {
+            background-color: rgba(74, 111, 165, 0.05);
+        }
+        .hover\:bg-accent:hover {
+            background-color: #4A6FA5;
+        }
+        .hover\:text-accent:hover {
+            color: #4A6FA5;
+        }
+        .hover\:border-accent:hover {
+            border-color: #4A6FA5;
+        }
+        .ring-accent {
+            --tw-ring-color: #4A6FA5;
+        }
+        .focus\:ring-accent:focus {
+            --tw-ring-color: #4A6FA5;
+        }
+
+        /* Keep gold for secondary elegance? We'll replace all gold with accent */
+        /* Remove gold references and use accent */
+        .bg-navy {
+            background-color: #0a0a12;
+        }
+        .bg-ivory {
+            background-color: #070423;
+        }
+        .text-ivory {
+            color: #f1f1ee;
+        }
+        .text-muted {
+            color: #8a8a8a;
+        }
+        .border-ivory\/10 {
+            border-color: rgba(248, 246, 240, 0.10);
+        }
+        .border-ivory\/5 {
+            border-color: rgba(248, 246, 240, 0.05);
+        }
+
+        /* ─── Glass card ─── */
+        .glass-card {
+            background: rgba(248, 246, 240, 0.04);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(248, 246, 240, 0.06);
+        }
+        .glass-card-light {
+            background: rgba(10, 10, 18, 0.03);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(10, 10, 18, 0.06);
+        }
+
+        /* ─── Navbar scroll ─── */
+        .navbar-scrolled {
+            background: rgba(10, 10, 18, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(248, 246, 240, 0.06);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ─── Hero grid background ─── */
+        .hero-grid {
+            background-image:
+                linear-gradient(rgba(74, 111, 165, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 111, 165, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* ─── Gradient orb ─── */
+        .orb {
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(74, 111, 165, 0.12), rgba(74, 111, 165, 0.02) 70%, transparent);
+            position: absolute;
+            filter: blur(80px);
+            pointer-events: none;
+            animation: orbFloat 12s ease-in-out infinite alternate;
+        }
+        @keyframes orbFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(40px, -30px) scale(1.1);
+            }
+        }
+
+        /* ─── Fade-up animations ─── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-up-d1 {
+            transition-delay: 0.05s;
+        }
+        .fade-up-d2 {
+            transition-delay: 0.10s;
+        }
+        .fade-up-d3 {
+            transition-delay: 0.15s;
+        }
+        .fade-up-d4 {
+            transition-delay: 0.20s;
+        }
+        .fade-up-d5 {
+            transition-delay: 0.25s;
+        }
+        .fade-up-d6 {
+            transition-delay: 0.30s;
+        }
+
+        /* ─── Text reveal ─── */
+        .text-reveal {
+            overflow: hidden;
+        }
+        .text-reveal span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: textReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes textReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ─── Card hover ─── */
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .card-hover-light:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+        }
+
+        /* ─── Button hover ─── */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #4A6FA5;
+            color: #fff;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.01em;
+        }
+        .btn-primary:hover {
+            background: #5B82B8;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(74, 111, 165, 0.25);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: #f5f3ee;
+            font-weight: 500;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(248, 246, 240, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+        }
+        .btn-secondary:hover {
+            background: rgba(248, 246, 240, 0.06);
+            border-color: rgba(248, 246, 240, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-accent {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: #4A6FA5;
+            font-weight: 500;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(74, 111, 165, 0.25);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+        .btn-outline-accent:hover {
+            background: rgba(74, 111, 165, 0.08);
+            border-color: #4A6FA5;
+            transform: translateY(-2px);
+        }
+
+        /* ─── Mobile menu ─── */
+        .mobile-menu {
+            background: rgba(10, 10, 18, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(248, 246, 240, 0.06);
+        }
+
+        /* ─── Form ─── */
+        .form-input {
+            width: 100%;
+            padding: 0.85rem 1.2rem;
+            background: rgba(248, 246, 240, 0.05);
+            border: 1px solid rgba(248, 246, 240, 0.08);
+            border-radius: 8px;
+            color: #f5f3ee;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+        }
+        .form-input:focus {
+            border-color: #4A6FA5;
+            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.15);
+        }
+        .form-input::placeholder {
+            color: #6a6a6a;
+        }
+        .form-input-light {
+            background: rgba(10, 10, 18, 0.03);
+            border: 1px solid rgba(10, 10, 18, 0.08);
+            color: #0a0a12;
+        }
+        .form-input-light:focus {
+            border-color: #4A6FA5;
+            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.15);
+        }
+        .form-input-light::placeholder {
+            color: #8a8a8a;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #8a8a8a;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.02em;
+        }
+        .form-label-light {
+            color: #5a5a5a;
+        }
+
+        /* ─── Timeline ─── */
+        .timeline-line {
+            position: relative;
+        }
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: calc(100% - 48px);
+            background: linear-gradient(to bottom, rgba(74, 111, 165, 0.2), rgba(74, 111, 165, 0.05));
+        }
+        @media (min-width: 768px) {
+            .timeline-line::before {
+                top: 24px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 2px;
+                height: calc(100% - 48px);
+            }
+        }
+
+        /* ─── Industry card ─── */
+        .industry-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(248, 246, 240, 0.06);
+        }
+        .industry-card:hover {
+            border-color: rgba(74, 111, 165, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ─── Portfolio card ─── */
+        .portfolio-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(248, 246, 240, 0.06);
+            overflow: hidden;
+        }
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(74, 111, 165, 0.15);
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+        }
+        .portfolio-card .portfolio-overlay {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .portfolio-card:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        /* ─── Responsive tweaks ─── */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2.4rem !important;
+                line-height: 1.15 !important;
+            }
+            .hero-sub {
+                font-size: 1rem !important;
+            }
+            .section-title {
+                font-size: 2rem !important;
+            }
+            .orb {
+                width: 300px;
+                height: 300px;
+                filter: blur(60px);
+            }
+            .btn-primary,
+            .btn-secondary {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.85rem;
+            }
+            .container-padding {
+                padding-left: 1.25rem;
+                padding-right: 1.25rem;
+            }
+        }
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.2rem !important;
+            }
+            .orb {
+                width: 400px;
+                height: 400px;
+                filter: blur(70px);
+            }
+        }
+
+        /* ─── Accessibility ─── */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .fade-up {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            .text-reveal span {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            .orb {
+                animation: none !important;
+            }
+        }
+
+        /* ─── Accent shimmer ─── */
+        .shimmer {
+            background: linear-gradient(135deg, rgba(74, 111, 165, 0.05) 0%, rgba(74, 111, 165, 0.12) 50%, rgba(74, 111, 165, 0.05) 100%);
+            background-size: 200% 200%;
+            animation: shimmerMove 6s ease-in-out infinite;
+        }
+        @keyframes shimmerMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* ─── Divider ─── */
+        .divider-accent {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(74, 111, 165, 0.15), transparent);
+            width: 100%;
+            max-width: 120px;
+            margin: 0 auto;
+        }
+        .divider-accent-left {
+            height: 1px;
+            background: linear-gradient(to right, rgba(74, 111, 165, 0.15), transparent);
+            width: 60px;
+        }
+
+        /* ─── Number badge ─── */
+        .number-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(74, 111, 165, 0.2);
+            color: #4A6FA5;
+            font-family: 'Manrope', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 999;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #25D366;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            color: white;
+            font-size: 28px;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 48px rgba(37, 211, 102, 0.4);
+        }
+
+        /* ─── Selected work badge ─── */
+        .demo-badge {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            background: rgba(74, 111, 165, 0.12);
+            color: #4A6FA5;
+            border: 1px solid rgba(74, 111, 165, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <!-- WhatsApp Float -->
+    <a href="#" class="whatsapp-float" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+        </svg>
+    </a>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback, useMemo } = React;
+
+        // ─── Custom hook for scroll animation ───
+        function useScrollAnimation() {
+            useEffect(() => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, {
+                    threshold: 0.12,
+                    rootMargin: '0px 0px -40px 0px'
+                });
+
+                document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+                return () => observer.disconnect();
+            }, []);
+        }
+
+        // ─── Navbar ───
+        function Navbar() {
+            const [scrolled, setScrolled] = useState(false);
+            const [mobileOpen, setMobileOpen] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY > 40);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const navLinks = [
+                { label: 'Home', href: '#home' },
+                { label: 'Services', href: '#services' },
+                { label: 'Solutions', href: '#solutions' },
+                { label: 'Industries', href: '#industries' },
+                { label: 'Work', href: '#work' },
+                { label: 'About', href: '#about' },
+                { label: 'Contact', href: '#contact' },
+            ];
+
+            return (
+                <header
+                    className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${scrolled ? 'navbar-scrolled' : 'bg-transparent'
+                        }`}
+                >
+                    <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
+                        <div className="flex items-center justify-between h-[72px] md:h-[80px]">
+                            {/* Logo */}
+                            <a href="#home" className="font-heading text-xl font-bold tracking-tight text-ivory flex items-center gap-2">
+                                <span className="text-accent">◆</span>
+                                VELVETNET
+                            </a>
+
+                            {/* Desktop Nav */}
+                            <nav className="hidden lg:flex items-center gap-8 text-sm font-medium">
+                                {navLinks.map(link => (
+                                    <a key={link.label} href={link.href} className="text-ivory/70 hover:text-ivory transition-colors duration-200">
+                                        {link.label}
+                                    </a>
+                                ))}
+                            </nav>
+
+                            {/* Desktop CTA */}
+                            <div className="hidden lg:block">
+                                <a href="#contact" className="btn-primary text-sm px-5 py-2.5">
+                                    Get a Free Consultation
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                </a>
+                            </div>
+
+                            {/* Mobile toggle */}
+                            <button
+                                onClick={() => setMobileOpen(!mobileOpen)}
+                                className="lg:hidden text-ivory/80 hover:text-ivory transition-colors p-1"
+                                aria-label="Toggle menu"
+                            >
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    {mobileOpen ? (
+                                        <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>
+                                    ) : (
+                                        <><line x1="3" y1="12" x2="19" y2="12"/><line x1="3" y1="6" x2="19" y2="6"/><line x1="3" y1="12" x2="19" y2="12"/></>
+                                    )}
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Mobile menu */}
+                    {mobileOpen && (
+                        <div className="lg:hidden mobile-menu py-6 px-5 border-t border-ivory/5">
+                            <nav className="flex flex-col gap-4 text-base font-medium">
+                                {navLinks.map(link => (
+                                    <a
+                                        key={link.label}
+                                        href={link.href}
+                                        className="text-ivory/80 hover:text-ivory transition-colors py-1"
+                                        onClick={() => setMobileOpen(false)}
+                                    >
+                                        {link.label}
+                                    </a>
+                                ))}
+                                <a
+                                    href="#contact"
+                                    className="btn-primary text-sm px-5 py-2.5 text-center justify-center mt-2"
+                                    onClick={() => setMobileOpen(false)}
+                                >
+                                    Get a Free Consultation
+                                </a>
+                            </nav>
+                        </div>
+                    )}
+                </header>
+            );
+        }
+
+        // ─── Hero ───
+        function Hero() {
+            return (
+                <section id="home" className="relative min-h-screen flex items-center pt-24 md:pt-28 overflow-hidden bg-navy">
+                    {/* Background */}
+                    <div className="absolute inset-0 hero-grid" />
+                    <div className="orb" style={{ top: '-10%', right: '-5%' }} />
+                    <div className="orb" style={{ bottom: '-10%', left: '-5%', animationDelay: '-4s' }} />
+
+                    <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-8 lg:px-12 py-12 md:py-20 w-full">
+                        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                            {/* Left content */}
+                            <div>
+                                <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.15em] uppercase text-accent/80 bg-accent/5 px-4 py-1.5 rounded-full border border-accent/10 mb-6 fade-up">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                                    BUSINESS TECHNOLOGY & DIGITAL SOLUTIONS
+                                </div>
+
+                                <h1 className="hero-title font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.08] text-ivory mb-5 fade-up fade-up-d1">
+                                    Your Business.
+                                    <br />
+                                    <span className="text-accent">Digitally Better.</span>
+                                </h1>
+
+                                <p className="hero-sub text-lg md:text-xl text-ivory/60 max-w-lg leading-relaxed mb-8 fade-up fade-up-d2">
+                                    We build websites, software and intelligent digital systems that help businesses attract
+                                    customers, automate operations and grow with confidence.
+                                </p>
+
+                                <div className="flex flex-wrap gap-4 fade-up fade-up-d3">
+                                    <a href="#contact" className="btn-primary">
+                                        Start a Project
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                    </a>
+                                    <a href="#services" className="btn-secondary">
+                                        Explore Services
+                                    </a>
+                                </div>
+
+                                {/* Trust micro */}
+                                <div className="flex items-center gap-6 mt-10 pt-8 border-t border-ivory/5 fade-up fade-up-d4">
+                                    <div className="flex -space-x-2">
+                                        {[1, 2, 3, 4].map(i => (
+                                            <div key={i} className="w-9 h-9 rounded-full border-2 border-navy bg-ivory/10 flex items-center justify-center text-xs font-medium text-ivory/60">
+                                                {String.fromCharCode(64 + i)}
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <span className="text-sm text-ivory/40">Trusted by growing businesses</span>
+                                </div>
+                            </div>
+
+                            {/* Right visual */}
+                            <div className="relative hidden lg:flex items-center justify-center fade-up fade-up-d3">
+                                <div className="relative w-full max-w-lg aspect-square">
+                                    {/* Abstract tech visual */}
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <div className="w-[70%] h-[70%] rounded-full border border-accent/10 bg-accent/5 animate-pulse" />
+                                        <div className="absolute w-[50%] h-[50%] rounded-full border border-accent/20 bg-accent/10" />
+                                        <div className="absolute w-[30%] h-[30%] rounded-full bg-accent/20" />
+                                    </div>
+
+                                    {/* Nodes */}
+                                    {[
+                                        { x: 15, y: 20, size: 8 },
+                                        { x: 75, y: 15, size: 12 },
+                                        { x: 88, y: 65, size: 10 },
+                                        { x: 55, y: 85, size: 14 },
+                                        { x: 20, y: 75, size: 6 },
+                                        { x: 45, y: 40, size: 10 },
+                                        { x: 70, y: 45, size: 8 },
+                                        { x: 30, y: 55, size: 12 },
+                                    ].map((node, i) => (
+                                        <div
+                                            key={i}
+                                            className="absolute rounded-full bg-accent/30"
+                                            style={{
+                                                left: `${node.x}%`,
+                                                top: `${node.y}%`,
+                                                width: node.size,
+                                                height: node.size,
+                                                boxShadow: '0 0 20px rgba(74,111,165,0.15)',
+                                            }}
+                                        />
+                                    ))}
+
+                                    {/* Connection lines */}
+                                    <svg className="absolute inset-0 w-full h-full" style={{ opacity: 0.15 }}>
+                                        <line x1="15%" y1="20%" x2="75%" y2="15%" stroke="#4A6FA5" strokeWidth="1" />
+                                        <line x1="75%" y1="15%" x2="88%" y2="65%" stroke="#4A6FA5" strokeWidth="1" />
+                                        <line x1="88%" y1="65%" x2="55%" y2="85%" stroke="#4A6FA5" strokeWidth="1" />
+                                        <line x1="55%" y1="85%" x2="20%" y2="75%" stroke="#4A6FA5" strokeWidth="1" />
+                                        <line x1="20%" y1="75%" x2="15%" y2="20%" stroke="#4A6FA5" strokeWidth="1" />
+                                        <line x1="45%" y1="40%" x2="70%" y2="45%" stroke="#4A6FA5" strokeWidth="1" />
+                                        <line x1="30%" y1="55%" x2="45%" y2="40%" stroke="#4A6FA5" strokeWidth="1" />
+                                        <line x1="70%" y1="45%" x2="30%" y2="55%" stroke="#4A6FA5" strokeWidth="1" />
+                                    </svg>
+
+                                    {/* Central glow */}
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <div className="w-20 h-20 rounded-full bg-accent/10 blur-2xl" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // ─── Trust Strip ───
+        function TrustStrip() {
+            return (
+                <section className="py-8 md:py-10 border-y border-ivory/5 bg-navy/80">
+                    <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
+                        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+                            <div className="flex items-center gap-6 flex-wrap justify-center text-sm font-medium text-ivory/60">
+                                <span className="text-accent font-semibold">Websites</span>
+                                <span className="text-ivory/20">•</span>
+                                <span className="text-accent font-semibold">Software</span>
+                                <span className="text-ivory/20">•</span>
+                                <span className="text-accent font-semibold">Automation</span>
+                                <span className="text-ivory/20">•</span>
+                                <span className="text-accent font-semibold">AI</span>
+                            </div>
+                            <p className="text-sm text-ivory/50 italic tracking-wide">
+                                “Technology designed around the way your business actually works.”
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // ─── Problem Section ───
+        function ProblemSection() {
+            const problems = [
+                'Manual processes',
+                'Scattered customer information',
+                'Missed enquiries',
+                'Outdated websites',
+                'Spreadsheet dependency',
+                'Poor online presence',
+                'Repetitive administrative work',
+            ];
+
+            return (
+                <section className="py-20 md:py-28 bg-ivory text-navy">
+                    <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
+                        <div className="text-center max-w-3xl mx-auto mb-16">
+                            <h2 className="section-title font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-navy mb-5 fade-up">
+                                Your Business Deserves <br className="hidden sm:block" />
+                                <span className="text-accent">Better Technology.</span>
+                            </h2>
+                            <p className="text-navy/60 text-lg fade-up fade-up-d1">
+                                Most growing businesses struggle with tools that don't work together.
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 max-w-4xl mx-auto mb-12">
+                            {problems.map((p, i) => (
+                                <div
+                                    key={i}
+                                    className="glass-card-light rounded-lg px-4 py-3 text-center text-sm font-medium text-navy/70 border border-navy/5 fade-up"
+                                    style={{ transitionDelay: `${i * 0.04}s` }}
+                                >
+                                    {p}
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="text-center fade-up">
+                            <div className="inline-block bg-accent/10 text-accent font-semibold px-6 py-3 rounded-lg border border-accent/10 text-sm md:text-base">
+                                VelvetNet turns these problems into simple digital systems.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // ─── Services ───
+        function Services() {
+            const services = [{
+                id: '01',
+                title: 'Websites',
+                desc: 'Professional websites designed to build trust and convert visitors into customers.',
+                icon: '◈'
+            }, {
+                id: '02',
+                title: 'Business Software',
+                desc: 'Custom web applications built around your business processes.',
+                icon: '▣'
+            }, {
+                id: '03',
+                title: 'Automation',
+                desc: 'Connect your tools and automate repetitive tasks using APIs, workflows and n8n.',
+                icon: '◉'
+            }, {
+                id: '04',
+                title: 'AI Solutions',
+                desc: 'Practical AI systems for customer support, business operations and productivity.',
+                icon: '◆'
+            }, {
+                id: '05',
+                title: 'Business Dashboards',
+                desc: 'Centralized dashboards for sales, inventory, customers, employees and performance.',
+                icon: '◊'
+            }, {
+                id: '06',
+                title: 'Digital Growth',
+                desc: 'SEO fundamentals, Google Business optimization and digital presence improvements.',
+                icon: '◇'
+            }, ];
+
+            return (
+                <section id="services" className="py-20 md:py-28 bg-navy">
+                    <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
+                        <div className="text-center max-w-3xl mx-auto mb-16">
+                            <span className="text-accent text-xs font-semibold tracking-[0.15em] uppercase">Services</span>
+                            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mt-2 mb-4 fade-up">
+                                What We Build
+                            </h2>
+                            <p className="text-ivory/50 text-lg fade-up fade-up-d1">
+                                End-to-end digital solutions crafted for real business results.
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+                            {services.map((s, i) => (
+                                <div
+                                    key={s.id}
+                                    className="glass-card rounded-2xl p-6 md:p-7 card-hover fade-up"
+                                    style={{ transitionDelay: `${i * 0.06}s` }}
+                                >
+                                    <div className="flex items-start gap-4">
+                                        <span className="number-badge text-sm">{s.id}</span>
+                                        <div>
+                                            <span className="text-accent text-2xl">{s.icon}</span>
+                                        </div>
+                                    </div>
+                                    <h3 className="font-heading text-xl font-semibold text-ivory mt-4">{s.title}</h3>
+                                    <p className="text-ivory/50 text-sm leading-relaxed mt-2">{s.desc}</p>
+                                    <a href="#contact" className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-4 hover:gap-2 transition-all">
+                                        Learn More
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                    </a>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // ─── Solutions ───
+        function Solutions() {
+            const solutions = [
+                { title: 'CRM Systems', desc: 'Manage leads, customers, follow-ups and sales.' },
+                { title: 'Inventory Management', desc: 'Track products, stock, purchases and sales.' },
+                { title: 'Booking Systems', desc: 'Manage appointments, services and customer bookings.' },
+                { title: 'Sales Management', desc: 'Track sales, payments, customers and reports.' },
+                { title: 'Transport Management', desc: 'Manage vehicles, drivers, trips, bookings, expenses and profitability.' },
+                { title: 'Workflow Automation', desc: 'Connect your existing tools and eliminate repetitive work.' },
+            ];
+
+            return (
+                <section id="solutions" className="py-20 md:py-28 bg-ivory text-navy">
+                    <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
+                        <div className="text-center max-w-3xl mx-auto mb-16">
+                            <span className="text-accent text-xs font-semibold tracking-[0.15em] uppercase">Solutions</span>
+                            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-navy mt-2 mb-4 fade-up">
+                                Technology Built Around <br className="hidden sm:block" />
+                                <span className="text-accent">Your Business</span>
+                            </h2>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                            {solutions.map((s, i) => (
+                                <div
+                                    key={i}
+                                    className="glass-card-light rounded-xl p-6 border border-navy/5 card-hover-light fade-up"
+                                    style={{ transitionDelay: `${i * 0.05}s` }}
+                                >
+                                    <div className="w-2 h-8 rounded-full bg-accent/30 mb-4" />
+                                    <h3 className="font-heading text-lg font-semibold text-navy">{s.title}</h3>
+                                    <p className="text-navy/50 text-sm mt-1.5">{s.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="text-center mt-12 fade-up">
+                            <a href="#contact" className="btn-primary">
+                                Tell Us What You Need
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // ─── Industries ───
+        function Industries() {
+            const industries = [
+                'Logistics & Transport',
+                'Healthcare',
+                'Fitness',
+                'Hospitality',
+                'Retail',
+                'Professional Services',
+                'Education',
+                'Local Businesses',
+            ];
+
+            return (
+                <section id="industries" className="py-20 md:py-28 bg-navy">
+                    <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
+                        <div className="text-center max-w-3xl mx-auto mb-16">
+                            <span className="text-accent text-xs font-semibold tracking-[0.15em] uppercase">Industries</span>
+                            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mt-2 mb-4 fade-up">
+                                Built For Businesses <br className="hidden sm:block" />
+                                <span className="text-accent">That Want To Move Forward.</span>
+                            </h2>
+                        </div>
+
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                            {industries.map((ind, i) => (
+                                <div
+                                    key={i}
+                                    className="industry-card rounded-xl px-4 py-5 text-center bg-accent/5 border-accent/10 fade-up"
+                                    style={{ transitionDelay: `${i * 0.04}s` }}
+                                >
+                                    <span className="text-sm font-medium text-ivory/80">{ind}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // ─── Process ───
+        function Process() {
+            const steps = [
+                { id: '01', title: 'Discover', desc: 'We understand your business, goals and current challenges.' },
+                { id: '02', title: 'Design', desc: 'We create a clear digital solution around your requirements.' },
+                { id: '03', title: 'Build', desc: 'We develop, integrate and test the system.' },
+                { id: '04', title: 'Grow', desc: 'We provide support, optimization and future improvements.' },
+            ];
+
+            return (
+                <section className="py-20 md:py-28 bg-ivory text-navy">
+                    <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
+                        <div className="text-center max-w-3xl mx-auto mb-16">
+                            <span className="text-accent text-xs font-semibold tracking-[0.15em] uppercase">Process</span>
+                            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-navy mt-2 mb-4 fade-up">
+                                How We <span className="text-accent">Work</span>
+                            </h2>
+                        </div>
+
+                        <div className="relative max-w-4xl mx-auto">
+                            {/* Desktop timeline line */}
+                            <div className="hidden md:block absolute left-1/2 top-10 bottom-10 w-px bg-accent/20 -translate-x-1/2" />
+
+                            <div className="space-y-8 md:space-y-0">
+                                {steps.map((s, i) => (
+                                    <div
+                                        key={s.id}
+                                        className={`flex flex-col md:flex-row items-center gap-6 md:gap-10 fade-up ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                                            }`}
+                                        style={{ transitionDelay: `${i * 0.08}s` }}
+                                    >
+                                        <div className={`flex-1 ${i % 2 === 0 ? 'md:text-right md:pr-8' : 'md:pl-8'}`}>
+                                            <div className="inline-block md:hidden text-accent text-sm font-semibold tracking-wider mb-1">
+                                                Step {s.id}
+                                            </div>
+                                            <h3 className="font-heading text-xl font-bold text-navy">{s.title}</h3>
+                                            <p className="text-navy/50 text-sm mt-1 max-w-sm mx-auto md:mx-0">{s.desc}</p>
+                                        </div>
+
+                                        <div className="relative flex items-center justify-center">
+                                            <div className="w-14 h-14 rounded-full border-2 border-accent/30 bg-ivory flex items-center justify-center font-heading font-bold text-accent text-sm shadow-lg z-10">
+                                                {s.id}
+                                            </div>
+                                            {i < steps.length - 1 && (
+                                                <div className="absolute top-full md:top-1/2 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:right-0 w-px h-8 md:w-8 md:h-px bg-accent/20" />
+                                            )}
+                                        </div>
+
+                                        <div className="flex-1 hidden md:block" />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // ─── Portfolio ───
+        function Portfolio() {
+            const projects = [{
+                title: 'Gym Management Website',
+                desc: 'Modern website and membership enquiry system.',
+                tag: 'Concept / Demo'
+            }, {
+                title: 'Salon Booking Platform',
+                desc: 'Service catalogue, appointment booking and WhatsApp integration.',
+                tag: 'Concept / Demo'
+            }, {
+                title: 'Transport Management System',
+                desc: 'Vehicle, driver, trip and customer management.',
+                tag: 'Concept / Demo'
+            }, {
+                title: 'Business Sales Dashboard',
+                desc: 'Sales, customers, inventory and reporting.',
+                tag: 'Concept / Demo'
+            }, ];
+
+            return (
+                <section id="work" className="py-20 md:py-28 bg-navy">
+                    <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
+                        <div className="text-center max-w-3xl mx-auto mb-16">
+                            <span className="text-accent text-xs font-semibold tracking-[0.15em] uppercase">Portfolio</span>
+                            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mt-2 mb-4 fade-up">
+                                Selected <span className="text-accent">Work</span>
+                            </h2>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-5 md:gap-6">
+                            {projects.map((p, i) => (
+                                <div
+                                    key={i}
+                                    className="portfolio-card rounded-xl p-6 md:p-7 glass-card fade-up"
+                                    style={{ transitionDelay: `${i * 0.06}s` }}
+                                >
+                                    <div className="flex items-start justify-between mb-4">
+                                        <span className="demo-badge">{p.tag}</span>
+                                        <span className="text-accent/20 font-heading text-2xl font-bold">0{i + 1}</span>
+                                    </div>
+                                    <h3 className="font-heading text-xl font-semibold text-ivory">{p.title}</h3>
+                                    <p className="text-ivory/40 text-sm mt-1.5">{p.desc}</p>
+                                    <a href="#contact" className="inline-flex items-center gap-1 text-accent text-sm font-medium mt-4 hover:gap-2 transition-all">
+                                        View Project
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                    </a>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // ─── Why VelvetNet ───
+        function WhyVelvetNet() {
+            const reasons = [
+                { title: 'Business First', desc: 'We focus on solving the business problem, not simply writing code.' },
+                { title: 'Fast & Practical', desc: 'Modern development tools allow us to build and launch solutions efficiently.' },
+                { title: 'Scalable', desc: 'Solutions can grow as your business grows.' },
+                { title: 'Personal Partnership', desc: 'Direct communication and ongoing support.' },
+            ];
+
+            return (
+                <section className="py-20 md:py-28 bg-ivory text-navy">
+                    <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
+                        <div className="text-center max-w-3xl mx-auto mb-16">
+                            <span className="text-accent text-xs font-semibold tracking-[0.15em] uppercase">Why VelvetNet</span>
+                            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-navy mt-2 mb-4 fade-up">
+                                Technology Without <span className="text-accent">The Complexity.</span>
+                            </h2>
+                        </div>
+
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+                            {reasons.map((r, i) => (
+                                <div
+                                    key={i}
+                                    className="glass-card-light rounded-xl p-6 border border-navy/5 card-hover-light fade-up"
+                                    style={{ transitionDelay: `${i * 0.06}s` }}
+                                >
+                                    <div className="w-1 h-10 rounded-full bg-accent/40 mb-4" />
+                                    <h3 className="font-heading text-lg font-semibold text-navy">{r.title}</h3>
+                                    <p className="text-navy/50 text-sm mt-1.5 leading-relaxed">{r.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // ─── About ───
+        function About() {
+            return (
+                <section id="about" className="py-20 md:py-28 bg-navy">
+                    <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
+                        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                            <div>
+                                <span className="text-accent text-xs font-semibold tracking-[0.15em] uppercase">About</span>
+                                <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mt-2 mb-5 fade-up">
+                                    We Believe Technology <br className="hidden sm:block" />
+                                    <span className="text-accent">Should Make Business Simpler.</span>
+                                </h2>
+                                <div className="space-y-4 text-ivory/60 text-base leading-relaxed fade-up fade-up-d1">
+                                    <p>
+                                        VelvetNet is a business technology company focused on helping growing businesses use
+                                        modern digital tools without unnecessary complexity.
+                                    </p>
+                                    <p>
+                                        From professional websites to custom business software, automation and AI, we create
+                                        practical technology that solves real operational problems.
+                                    </p>
+                                </div>
+                                <div className="mt-8 fade-up fade-up-d2">
+                                    <a href="#contact" className="btn-primary">
+                                        Let's Talk
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div className="relative flex items-center justify-center fade-up fade-up-d2">
+                                <div className="relative w-full max-w-sm aspect-square">
+                                    <div className="absolute inset-0 rounded-2xl border border-accent/10 bg-accent/5" />
+                                    <div className="absolute inset-[10%] rounded-2xl border border-accent/20 bg-accent/10" />
+                                    <div className="absolute inset-[25%] rounded-full border border-accent/30 bg-accent/20" />
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <span className="font-heading text-5xl font-bold text-accent/20">◆</span>
+                                    </div>
+                                    <div className="absolute bottom-[15%] right-[10%] text-xs text-accent/30 font-heading font-bold tracking-wider">
+                                        VELVETNET
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // ─── CTA Section ───
+        function CTASection() {
+            return (
+                <section className="relative py-20 md:py-28 overflow-hidden bg-navy">
+                    <div className="absolute inset-0 hero-grid" />
+                    <div className="orb" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
+
+                    <div className="relative z-10 max-w-4xl mx-auto px-5 md:px-8 lg:px-12 text-center">
+                        <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-ivory leading-[1.1] fade-up">
+                            Have a <span className="text-accent">Business Problem?</span>
+                        </h2>
+                        <p className="text-ivory/50 text-xl mt-4 fade-up fade-up-d1">
+                            Let's turn it into a digital solution.
+                        </p>
+                        <div className="flex flex-wrap justify-center gap-4 mt-10 fade-up fade-up-d2">
+                            <a href="#contact" className="btn-primary text-base px-8 py-3.5">
+                                Book a Free Consultation
+                            </a>
+                            <a href="#" className="btn-secondary text-base px-8 py-3.5">
+                                WhatsApp Us
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // ─── Contact ───
+        function Contact() {
+            const [formData, setFormData] = useState({
+                name: '',
+                business: '',
+                email: '',
+                phone: '',
+                service: '',
+                message: '',
+            });
+            const [submitted, setSubmitted] = useState(false);
+
+            const handleChange = (e) => {
+                setFormData({ ...formData, [e.target.name]: e.target.value });
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                // Basic validation
+                if (!formData.name || !formData.email || !formData.message) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                setSubmitted(true);
+                // In production, send to API
+                console.log('Form submitted:', formData);
+                setTimeout(() => setSubmitted(false), 3000);
+            };
+
+            const services = ['Websites', 'Business Software', 'Automation', 'AI Solutions', 'Business Dashboards', 'Digital Growth'];
+
+            return (
+                <section id="contact" className="py-20 md:py-28 bg-ivory text-navy">
+                    <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
+                        <div className="text-center max-w-3xl mx-auto mb-16">
+                            <span className="text-accent text-xs font-semibold tracking-[0.15em] uppercase">Contact</span>
+                            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-navy mt-2 mb-4 fade-up">
+                                Let's Build Something <span className="text-accent">Together</span>
+                            </h2>
+                        </div>
+
+                        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
+                            {/* Form */}
+                            <div className="lg:col-span-3 fade-up">
+                                <form onSubmit={handleSubmit} className="space-y-5">
+                                    <div className="grid sm:grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="form-label form-label-light">Full Name *</label>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                value={formData.name}
+                                                onChange={handleChange}
+                                                className="form-input form-input-light"
+                                                placeholder="Your name"
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="form-label form-label-light">Business Name</label>
+                                            <input
+                                                type="text"
+                                                name="business"
+                                                value={formData.business}
+                                                onChange={handleChange}
+                                                className="form-input form-input-light"
+                                                placeholder="Your business"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="grid sm:grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="form-label form-label-light">Email *</label>
+                                            <input
+                                                type="email"
+                                                name="email"
+                                                value={formData.email}
+                                                onChange={handleChange}
+                                                className="form-input form-input-light"
+                                                placeholder="you@company.com"
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="form-label form-label-light">Phone</label>
+                                            <input
+                                                type="tel"
+                                                name="phone"
+                                                value={formData.phone}
+                                                onChange={handleChange}
+                                                className="form-input form-input-light"
+                                                placeholder="+1 234 567 890"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label className="form-label form-label-light">Service Required</label>
+                                        <select
+                                            name="service"
+                                            value={formData.service}
+                                            onChange={handleChange}
+                                            className="form-input form-input-light appearance-none"
+                                        >
+                                            <option value="">Select a service...</option>
+                                            {services.map(s => (
+                                                <option key={s} value={s}>{s}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label className="form-label form-label-light">Tell us about your project *</label>
+                                        <textarea
+                                            name="message"
+                                            value={formData.message}
+                                            onChange={handleChange}
+                                            rows="4"
+                                            className="form-input form-input-light resize-none"
+                                            placeholder="What are you looking to build?"
+                                            required
+                                        />
+                                    </div>
+                                    <button type="submit" className="btn-primary w-full justify-center">
+                                        {submitted ? '✓ Sent!' : 'Send Enquiry'}
+                                    </button>
+                                    <p className="text-xs text-navy/40 text-center mt-2">
+                                        We'll get back to you within 24 hours.
+                                    </p>
+                                </form>
+                            </div>
+
+                            {/* Contact info */}
+                            <div className="lg:col-span-2 space-y-6 fade-up fade-up-d1">
+                                <div className="glass-card-light rounded-xl p-6 border border-navy/5">
+                                    <h4 className="font-heading font-semibold text-navy text-sm uppercase tracking-wider">Connect</h4>
+                                    <div className="mt-4 space-y-3">
+                                        <a href="#" className="flex items-center gap-3 text-navy/60 hover:text-navy transition-colors">
+                                            <span className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent">📱</span>
+                                            <span>WhatsApp</span>
+                                        </a>
+                                        <a href="#" className="flex items-center gap-3 text-navy/60 hover:text-navy transition-colors">
+                                            <span className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent">✉</span>
+                                            <span>Email</span>
+                                        </a>
+                                        <a href="#" className="flex items-center gap-3 text-navy/60 hover:text-navy transition-colors">
+                                            <span className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent">📍</span>
+                                            <span>Location</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div className="glass-card-light rounded-xl p-6 border border-navy/5">
+                                    <h4 className="font-heading font-semibold text-navy text-sm uppercase tracking-wider">Availability</h4>
+                                    <p className="text-navy/60 text-sm mt-2">Mon – Fri · 9:00 – 18:00</p>
+                                    <p className="text-navy/40 text-xs mt-1">Response within 24 hours</p>
+                                </div>
+
+                                <div className="glass-card-light rounded-xl p-6 border border-navy/5">
+                                    <p className="text-navy/40 text-xs leading-relaxed">
+                                        <span className="text-navy/60 font-medium">Note:</span> All contact details shown are placeholders.
+                                        Replace with your actual business information.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // ─── Footer ───
+        function Footer() {
+            return (
+                <footer className="bg-navy border-t border-ivory/5 py-12 md:py-16">
+                    <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+                            {/* Brand */}
+                            <div className="sm:col-span-2 lg:col-span-1">
+                                <a href="#home" className="font-heading text-xl font-bold text-ivory flex items-center gap-2">
+                                    <span className="text-accent">◆</span>
+                                    VELVETNET
+                                </a>
+                                <p className="text-ivory/40 text-sm mt-2 italic">Your Business. Digitally Better.</p>
+                            </div>
+
+                            {/* Services */}
+                            <div>
+                                <h5 className="text-ivory/40 text-xs font-semibold tracking-wider uppercase mb-3">Services</h5>
+                                <ul className="space-y-2 text-sm">
+                                    {['Websites', 'Software', 'Automation', 'AI Solutions', 'Business Dashboards'].map(s => (
+                                        <li key={s}><a href="#services" className="text-ivory/50 hover:text-ivory transition-colors">{s}</a></li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            {/* Company */}
+                            <div>
+                                <h5 className="text-ivory/40 text-xs font-semibold tracking-wider uppercase mb-3">Company</h5>
+                                <ul className="space-y-2 text-sm">
+                                    {['About', 'Work', 'Industries', 'Contact'].map(s => (
+                                        <li key={s}><a href={`#${s.toLowerCase()}`} className="text-ivory/50 hover:text-ivory transition-colors">{s}</a></li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            {/* Connect */}
+                            <div>
+                                <h5 className="text-ivory/40 text-xs font-semibold tracking-wider uppercase mb-3">Connect</h5>
+                                <ul className="space-y-2 text-sm">
+                                    {['WhatsApp', 'Instagram', 'LinkedIn', 'Email'].map(s => (
+                                        <li key={s}><a href="#" className="text-ivory/50 hover:text-ivory transition-colors">{s}</a></li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div className="border-t border-ivory/5 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ivory/30">
+                            <span>© 2026 VelvetNet. All rights reserved.</span>
+                            <span className="flex items-center gap-4">
+                                <a href="#" className="hover:text-ivory/50 transition-colors">Privacy</a>
+                                <a href="#" className="hover:text-ivory/50 transition-colors">Terms</a>
+                            </span>
+                        </div>
+                    </div>
+                </footer>
+            );
+        }
+
+        // ─── App ───
+        function App() {
+            useScrollAnimation();
+
+            return (
+                <div className="bg-navy">
+                    <Navbar />
+                    <Hero />
+                    <TrustStrip />
+                    <ProblemSection />
+                    <Services />
+                    <Solutions />
+                    <Industries />
+                    <Process />
+                    <Portfolio />
+                    <WhyVelvetNet />
+                    <About />
+                    <CTASection />
+                    <Contact />
+                    <Footer />
+                </div>
+            );
+        }
+
+        // ─── Mount ───
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
